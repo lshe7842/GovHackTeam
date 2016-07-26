@@ -1,0 +1,19 @@
+{
+  "name": "govhack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lshe7842/GovHackTeam.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lshe7842/GovHackTeam/issues"
+  },
+  "homepage": "https://github.com/lshe7842/GovHackTeam#readme"
+}
