@@ -6,6 +6,8 @@ var express = require('express'),
 
 var app = express();
 
+app.use(require('connect-livereload')());
+
 function relative(path) {
 	return fp.join(__dirname, path);
 }

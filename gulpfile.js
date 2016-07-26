@@ -2,8 +2,7 @@ var gulp = require('gulp'),
 	server = require('gulp-express'),
 	source = require('vinyl-source-stream'),
 	watchify = require('watchify'),
-	browserify = require('browserify'),
-	browserSync = require('browser-sync').create();
+	browserify = require('browserify');
 
 gulp.task('bundle-client', function(){
 	var b = watchify(browserify({entries: ['src/bundle/client.js']}));
@@ -17,7 +16,7 @@ gulp.task('bundle-client', function(){
         var stream = b.bundle();
         return stream
             .pipe(source('bundle.js'))
-            .pipe(gulp.dest('public/js/'));    
+            .pipe(gulp.dest('public/js/')); 
     };
 
     return rebundle();
@@ -25,6 +24,9 @@ gulp.task('bundle-client', function(){
 
 gulp.task('server', function(){
 	server.run(['app.js']);
+
+    gulp.watch(['./public/js/*.js'], server.notify);
+    gulp.watch(['./templates/*.hbs'], server.notify);
 });
 
-gulp.task('default', ['server', 'bundle-client']);
+gulp.task('default', ['bundle-client', 'server']);
