@@ -1,9 +1,11 @@
-```npm install```
+First
+
+    npm install
 
 Then
 
-```gulp```
+    gulp
 
 Then verify
 
-```http://localhost:3000/home```
+    http://localhost:3000/home
