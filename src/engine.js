@@ -345,6 +345,8 @@ var Engine = {
 		  var node = svg.append("g").selectAll(".node")
 		      .data(energy.nodes)
 		    .enter().append("g")
+		      .attr("data-targets", getToLinks)
+		      .attr("data-sources", getFromLinks)
 		      .attr("class", "node")
 		      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 		    .call(d3.drag()
@@ -370,6 +372,28 @@ var Engine = {
 		    .filter(function(d) { return d.x < width / 2; })
 		      .attr("x", 6 + sankey.nodeWidth())
 		      .attr("text-anchor", "start");
+
+		  function getToLinks(d) {
+		  	var attrVal = "";
+		  	for(var i = 0; i < d.sourceLinks.length; i++){
+		  		attrVal += d.sourceLinks[i].target.name + '=' + format(d.sourceLinks[i].value);
+		  		if(i !== d.sourceLinks.length - 1){
+		  			attrVal += '*';
+		  		}
+		  	}
+		  	return attrVal;
+		  }
+
+		  function getFromLinks(d) {
+		  	var attrVal = "";
+		  	for(var i = 0; i < d.targetLinks.length; i++){
+		  		attrVal += d.targetLinks[i].source.name + '=' + format(d.targetLinks[i].value);
+		  		if(i !== d.targetLinks.length - 1){
+		  			attrVal += '*';
+		  		}
+		  	}
+		  	return attrVal;
+		  }
 
 		  function dragmove(d) {
 		    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
