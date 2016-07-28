@@ -1,0 +1,10 @@
+html {
+	background-color: #ffffef;
+}
+
+#chart {
+	.link {
+		@include transition(all, 0.2s);
+		cursor: pointer;
+	}
+}
