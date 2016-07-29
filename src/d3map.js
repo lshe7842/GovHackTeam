@@ -49,8 +49,8 @@ var D3Map = {
   zoommap: function() {
 
     //Width and height
-    var w = 500;
-    var h = 300;
+    var w = 800;
+    var h = 600;
 
     //Define map projection
     var projection = d3.geoMercator()
@@ -73,7 +73,7 @@ var D3Map = {
     svg.call(zoom);
 
     //Load in GeoJSON data
-    d3.json("/data/india.json", function(json) {
+    d3.json("/data/au-states.json", function(json) {
 
 
         // Calculate bounding box transforms for entire collection
@@ -93,6 +93,8 @@ var D3Map = {
            .enter()
            .append("path")
            .attr("d", path)
+           .style("stroke-width", "1")
+           .style("stroke", "black")
            .style("fill", "steelblue");
 
     });
