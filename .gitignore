@@ -1,5 +1,5 @@
 logs/
 node_modules/
+public/css/styles.css
 public/js/bundle.js
 .sass-cache/
-public/css/styles.css
