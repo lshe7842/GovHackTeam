@@ -1,1 +1,63 @@
-html{box-sizing:border-box}*,*::after,*::before{box-sizing:inherit}html{background-color:#ffffef}#chart .link{-webkit-transition:all,0.2s;-moz-transition:all,0.2s;transition:all,0.2s;cursor:pointer}
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+html {
+  background-color: #ffffef; }
+
+#chart .link {
+  -webkit-transition: all, 0.2s;
+  -moz-transition: all, 0.2s;
+  transition: all, 0.2s;
+  cursor: pointer; }
+
+.counties {
+  fill: none; }
+
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round; }
+
+.q0-9 {
+  fill: #f7fbff; }
+
+.q1-9 {
+  fill: #deebf7; }
+
+.q2-9 {
+  fill: #c6dbef; }
+
+.q3-9 {
+  fill: #9ecae1; }
+
+.q4-9 {
+  fill: #6baed6; }
+
+.q5-9 {
+  fill: #4292c6; }
+
+.q6-9 {
+  fill: #2171b5; }
+
+.q7-9 {
+  fill: #08519c; }
+
+.q8-9 {
+  fill: #08306b; }
+
+.overlay {
+  fill: none;
+  pointer-events: all; }
+
+.state {
+  fill: #aaa; }
+
+.county-border,
+.state-border {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round; }

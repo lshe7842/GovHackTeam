@@ -2,3 +2,4 @@ logs/
 node_modules/
 public/js/bundle.js
 .sass-cache/
+public/css/styles.css

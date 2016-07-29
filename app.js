@@ -26,12 +26,21 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 
 // Routes here
-app.get('/home', function(req, res, next){
+app.get(['/', '/home'], function(req, res, next){
 	res.render('home', {
 		title: 'GovHack',
 		layout: 'default'
 	});
 });
+
+app.get(['/map'], function(req, res, next){
+	res.render('map', {
+		title: 'GovHack',
+		layout: 'default'
+	});
+});
+
+
 
 var port = process.env.PORT || 3000;
 app.listen(port);
