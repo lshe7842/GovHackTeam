@@ -28,7 +28,7 @@ gulp.task('bundle-client', function(){
 gulp.task('css', function(){
     //return sass('./sass/main/main.scss', { style: 'compressed' })
 		return gulp.src('./sass/main/main.scss')
-				.pipe(nodesass().on('error', nodesass.logError))
+				.pipe(nodesass({outputStyle: 'compressed'}).on('error', nodesass.logError))
         .pipe(rename('styles.css'))
         .pipe(gulp.dest('./public/css'));
 });
