@@ -302,10 +302,10 @@ var Engine = {
 		  return sankey;
 		};
 	},
-	sankeyDemo: function(){
+	sankeyDemo: function(pW, pH){
 		var margin = {top: 1, right: 1, bottom: 6, left: 1},
-		    width = 960 - margin.left - margin.right,
-		    height = 500 - margin.top - margin.bottom;
+		    width = pW - margin.left - margin.right,
+		    height = pH - margin.top - margin.bottom;
 
 		var formatNumber = d3.format(",.0f"),
 		    format = function(d) { return formatNumber(d) + " TWh"; },
