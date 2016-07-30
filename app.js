@@ -4,7 +4,8 @@ var express = require('express'),
 	fp = require('path'),
 	methodOverride = require('method-override'),
 	csv = require('fast-csv'),
-	fs = require('fs');
+	fs = require('fs'),
+	_ = require('lodash');
 
 var app = express();
 
@@ -35,20 +36,6 @@ app.get(['/', '/home'], function(req, res, next){
 	});
 });
 
-app.get(['/csv'], function(req, res, next){
-	var stream = fs.createReadStream("./data/ato/GEARING-noheader.csv");
- 	var dataArray = [];
-	csv
-	 .fromStream(stream)
-	 .on("data", function(data){
-	    dataArray.push(data);
-	 })
-	 .on("end", function(){
-	     console.log("done");
-	     res.json(dataArray);
-	 });
-});
-
 app.get(['/map'], function(req, res, next){
 	res.render('map', {
 		title: 'GovHack',
@@ -56,7 +43,40 @@ app.get(['/map'], function(req, res, next){
 	});
 });
 
+app.get('/api/gearing', function(req, res, next) {
+	console.log("received request at /api/gearing: " + req.query);
+	if(req.query.sa4) {
+		//_.find(gearingArray, req.query.sa4);
+		//res.json({"object": _.find(gearingArray, req.query.sa4)})
+		//res.json(_.find(gearingArray, req.query.sa4))
+		res.json({"invalid": "request"})
+	} else {
 
+		res.json(gearingArray);
+	}
+})
+
+//return data for the whole country
+var stream = fs.createReadStream("./data/ato/GEARING.csv");
+var gearingArray = [];
+console.log("***** starting to load gearing data:" + new Date());
+csv
+ .fromStream(stream, {headers: true})
+ .on("data", function(data){
+		gearingArray.push({sex: data["input.Sex"],
+												age: data["input.AGE"],
+												occupation: data["input.Occupation"],
+												sa4: data["input.SA4"],
+												gearing: data["GEARING"],
+												gearingFlag: data["GEARINGFLAG"],
+											});
+ })
+ .on("data-invalid", function(data) {
+	 return false;
+ })
+ .on("end", function(){
+		 console.log("***** done loading gearing data:" + new Date());
+ });
 
 var port = process.env.PORT || 3000;
 app.listen(port);
