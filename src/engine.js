@@ -309,7 +309,7 @@ var Engine = {
 
 		var formatNumber = d3.format(",.0f"),
 		    format = function(d) { return formatNumber(d) + " TWh"; },
-		    color = d3.scaleOrdinal(d3.schemeCategory20);
+		    color = d3.scale.category20();
 
 		var svg = d3.select("#chart").append("svg")
 		    .attr("width", width + margin.left + margin.right)
@@ -349,9 +349,9 @@ var Engine = {
 		      .attr("data-sources", getFromLinks)
 		      .attr("class", "node")
 		      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-		    .call(d3.drag()
-		      .subject(function(d) { return d; })
-		      .on("start", function() { this.parentNode.appendChild(this); })
+		    .call(d3.behavior.drag()
+		      .origin(function(d) { return d; })
+		      .on("dragstart", function() { this.parentNode.appendChild(this); })
 		      .on("drag", dragmove));
 
 		  node.append("rect")
