@@ -1,6 +1,7 @@
 var _ = require('lodash'),
-	d3 = require('d3'),
-	energy = require('./demo.json');
+	d3 = require('d3');
+
+var energy;
 
 var Engine = {
 	config: {},
@@ -303,13 +304,21 @@ var Engine = {
 		  return sankey;
 		};
 	},
+	sankeySA: function(pW, pH, code, group){
+		energy = require('./get-sankey-data-by-sa')(code, group);
+		this.plotSankey(pW, pH);
+	},
 	sankeyDemo: function(pW, pH){
+		energy = require('../ad-hoc/sankey-all-by-oc.json');
+		this.plotSankey(pW, pH);
+	},
+	plotSankey: function(pW, pH){
 		var margin = {top: 1, right: 1, bottom: 6, left: 1},
 		    width = pW - margin.left - margin.right,
 		    height = pH - margin.top - margin.bottom;
 
 		var formatNumber = d3.format(",.0f"),
-		    format = function(d) { return formatNumber(d) + " TWh"; },
+		    format = function(d) { return formatNumber(d) + ""; },
 		    color = d3.scale.category20();
 
 		var svg = d3.select("#chart").append("svg")
@@ -328,7 +337,6 @@ var Engine = {
 
 		$('#btn-update-1').on('click', function(){
 			var energyCpy = _.cloneDeep(energy);
-			energyCpy.links[2].value = 1280.322;
 		  	sankeyfy(energyCpy, true);
 		  });
 
@@ -339,7 +347,7 @@ var Engine = {
 			  sankey
 			      .nodes(data.nodes)
 			      .links(data.links)
-			      .layout(16);
+			      .layout();
 
 			      if(isUpdate){
 			      	var link = d3.selectAll(".link")
@@ -435,10 +443,6 @@ var Engine = {
 		  	}
 		  	return attrVal;
 		  }
-
-		  
-
-		  
 	}
 };
 
