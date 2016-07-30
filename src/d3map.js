@@ -73,7 +73,7 @@ var D3Map = {
     svg.call(zoom);
 
     //Load in GeoJSON data
-    d3.json("/data/au-states.json", function(json) {
+    d3.json("/data/aus_lga.json", function(json) {
 
 
         // Calculate bounding box transforms for entire collection
