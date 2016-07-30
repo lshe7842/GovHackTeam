@@ -1,7 +1,7 @@
 // Main entry for the app
 var Engine = require('../engine');
 Engine.init();
-Engine.sankeyDemo();
+Engine.sankeyDemo(750, 500);
 
 
 var D3Map = require('../d3map');
