@@ -2,7 +2,9 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	hbs = require('express-hbs'),
 	fp = require('path'),
-	methodOverride = require('method-override');
+	methodOverride = require('method-override'),
+	csv = require('fast-csv'),
+	fs = require('fs');
 
 var app = express();
 
@@ -31,6 +33,20 @@ app.get(['/', '/home'], function(req, res, next){
 		title: 'GovHack',
 		layout: 'default'
 	});
+});
+
+app.get(['/csv'], function(req, res, next){
+	var stream = fs.createReadStream("./data/ato/GEARING-noheader.csv");
+ 	var dataArray = [];
+	csv
+	 .fromStream(stream)
+	 .on("data", function(data){
+	    dataArray.push(data);
+	 })
+	 .on("end", function(){
+	     console.log("done");
+	     res.json(dataArray);
+	 });
 });
 
 app.get(['/map'], function(req, res, next){
