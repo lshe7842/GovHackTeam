@@ -1,0 +1,50 @@
+input.Ind,input.Sex,input.AGE,input.Occupation,input.PartnerStatus,input.SA4,input..Siefa.rank...Macro.Link.ABS.,input.Gross_rent_amt,input.Net_rent_amt,input..RankRent...Macro.Link.ABS.,input.Spouse_adjusted_taxable_inc,input.Net_fincl_invstmt_lss_amt,input.Rent_int_ded_amt,input.Taxable_Income,input.Help_debt,input.Total_PP_BI_amt,input.Total_NPP_BI_amt,input.Net_fincl_invstmt_lss_amt.1,input.Help_debt.1,input.Grs_int_amt,GEARING,GEARINGFLAG,LEVERAGE
+26649,Male,55-59 years,Professionals,No,87,87,0,0,87,0,0,0,56578,5424,0,0,0,5424,0,0,FALSE,NA
+26650,Female,45-49 years,Other,No,1,1,0,0,25,0,0,0,22928,0,0,19329,0,0,3,0,FALSE,NA
+26651,Female,40-44 years,Professionals,Yes,13,13,0,0,80,101870,0,0,67046,0,0,0,0,0,105,0,FALSE,NA
+26652,Female,45-49 years,Clerical and Administrative Workers,Yes,34,34,0,0,24,94783,0,0,84041,0,0,0,0,0,1036,0,FALSE,NA
+26653,Female,45-49 years,Clerical and Administrative Workers,Yes,27,27,0,0,67,76604,0,0,38424,0,0,0,0,0,8162,0,FALSE,NA
+26654,Female,40-44 years,Clerical and Administrative Workers,Yes,27,27,0,0,67,52325,0,0,37436,0,0,0,0,0,43,0,FALSE,NA
+26655,Female,45-49 years,Other,No,60,60,0,0,39,0,0,0,39096,0,0,0,0,0,248,0,FALSE,NA
+43,Male,70-74 years,Other,No,78,78,0,0,57,0,0,0,39833,0,0,0,0,0,3730,0,FALSE,NA
+44,Female,70-74 years,Other,No,25,25,247393,201951,19,0,0,0,318098,0,0,0,0,0,25529,201951,FALSE,Inf
+45,Male,70-74 years,Other,Yes,47,47,0,0,2,6047,0,0,21617,0,0,0,0,0,3263,0,FALSE,NA
+46,Female,70-74 years,Other,No,78,78,41377,32948,57,0,0,0,57830,0,0,0,0,0,7063,32948,FALSE,Inf
+47,Male,70-74 years,Other,Yes,3,3,0,0,4,23422,0,0,23426,0,0,0,0,0,4430,0,FALSE,NA
+48,Female,70-74 years,Other,No,40,40,0,0,9,0,0,0,20052,0,0,0,0,0,752,0,FALSE,NA
+49,Female,70-74 years,Other,No,42,42,0,0,5,0,0,0,32597,0,0,0,0,0,0,0,FALSE,NA
+50,Male,70-74 years,Other,No,74,74,0,0,37,0,0,0,12062,0,0,0,0,0,0,0,FALSE,NA
+51,Male,70-74 years,Other,Yes,26,26,0,0,3,10592,0,0,28750,0,0,0,0,0,16613,0,FALSE,NA
+52,Male,70-74 years,Other,No,47,47,0,0,2,0,0,0,310,0,0,0,0,0,0,0,FALSE,NA
+53,Female,70-74 years,Other,No,47,47,0,0,2,0,0,0,49839,0,0,0,0,0,41210,0,FALSE,NA
+54,Female,70-74 years,Other,No,50,50,17823,5799,52,0,0,0,39992,0,0,0,0,0,579,5799,FALSE,Inf
+55,Female,70-74 years,Other,No,42,42,0,0,5,0,0,0,33863,0,0,0,0,0,303,0,FALSE,NA
+56,Female,70-74 years,Other,Yes,33,33,0,0,42,69971,0,0,56234,0,0,0,0,0,7155,0,FALSE,NA
+57,Male,70-74 years,Other,No,73,73,0,0,56,0,0,0,32991,0,0,0,0,0,3694,0,FALSE,NA
+58,Male,70-74 years,Other,No,3,3,0,0,4,0,0,0,1211,0,0,0,0,0,0,0,FALSE,NA
+59,Male,70-74 years,Other,No,32,32,8384,7005,23,0,0,0,12073,0,0,0,0,0,2359,7005,FALSE,Inf
+60,Female,70-74 years,Other,No,31,31,0,0,7,0,0,0,34439,0,0,0,0,0,1187,0,FALSE,NA
+61,Male,70-74 years,Other,No,86,86,0,0,66,0,0,0,12670,0,0,0,0,0,4652,0,FALSE,NA
+62,Male,70-74 years,Other,No,3,3,0,0,4,0,0,0,35309,0,0,0,0,0,11803,0,FALSE,NA
+63,Male,70-74 years,Other,No,28,28,0,0,18,0,0,0,4922,0,0,0,0,0,0,0,FALSE,NA
+64,Female,70-74 years,Other,No,3,3,0,0,4,0,0,0,28877,0,0,0,0,0,1305,0,FALSE,NA
+65,Male,70-74 years,Other,Yes,64,64,0,0,11,67409,0,0,38963,0,0,0,0,0,248,0,FALSE,NA
+66,Female,70-74 years,Other,No,25,25,37620,29739,19,0,0,0,35968,0,0,0,0,0,1044,29739,FALSE,Inf
+67,Male,70-74 years,Other,Yes,50,50,0,0,52,10519,0,0,48669,0,0,0,0,0,2195,0,FALSE,NA
+68,Female,70-74 years,Other,No,43,43,0,0,58,0,0,0,24304,0,0,0,0,0,23985,0,FALSE,NA
+69,Male,70-74 years,Other,Yes,3,3,0,0,4,64065,0,0,118962,0,0,0,0,0,3425,0,FALSE,NA
+70,Male,70-74 years,Other,No,78,78,0,0,57,0,0,0,2499,0,0,0,0,0,0,0,FALSE,NA
+1,Female,50-54 years,Clerical and Administrative Workers,No,11,11,0,0,12,0,0,0,65554,0,0,0,0,0,0,0,FALSE,NA
+2,Male,45-49 years,Sales workers,Yes,28,28,0,0,18,43808,0,0,61727,0,0,0,0,0,0,0,FALSE,NA
+3,Female,55-59 years,Clerical and Administrative Workers,Yes,50,50,8607,1191,52,58620,0,2718,64581,0,0,0,0,0,0,1191,FALSE,0.438189845
+4,Female,55-59 years,Managers,No,80,80,0,0,35,0,0,0,35754,0,0,0,0,0,1,0,FALSE,NA
+5,Female,50-54 years,Other,Yes,76,76,0,0,85,0,0,0,42262,0,0,0,0,0,0,0,FALSE,NA
+6,Male,50-54 years,Other,No,59,59,0,0,79,0,0,0,39934,0,32702,511727,0,0,13,0,FALSE,NA
+7,Female,40-44 years,Other,No,47,47,0,0,2,0,0,0,4500,15827,0,0,0,15827,0,0,FALSE,NA
+8,Female,65-69 years,Other,Yes,52,52,0,0,69,9607,0,0,1846,0,0,0,0,0,435,0,FALSE,NA
+9,Female,65-69 years,Other,Yes,26,26,0,0,3,140708,0,0,88612,0,0,0,0,0,5239,0,FALSE,NA
+10,Male,65-69 years,Other,Yes,26,26,0,0,3,6861,0,0,54216,0,0,0,0,0,32,0,FALSE,NA
+11,Female,65-69 years,Other,Yes,41,41,7669,2800,65,8131,0,2212,19960,0,0,3068,0,0,48,2800,FALSE,1.265822785
+12,Female,65-69 years,Other,Yes,3,3,0,0,4,22786,0,0,10397,0,0,0,0,0,10165,0,FALSE,NA
+13,Male,55-59 years,Labourers,Yes,52,52,0,0,69,33676,0,0,31626,0,0,0,0,0,0,0,FALSE,NA
+14,Male,60-64 years,Clerical and Administrative Workers,Yes,42,42,0,0,5,153515,0,0,28876,0,0,0,0,0,0,0,FALSE,NA

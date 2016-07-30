@@ -40,6 +40,7 @@ gulp.task('server', function(){
     gulp.watch(['./public/js/*.js'], { usePolling: true }, server.notify);
     gulp.watch(['./public/css/*.css'], { usePolling: true }, server.notify);
     gulp.watch(['./templates/*.hbs'], { usePolling: true }, server.notify);
+		gulp.watch(['app.js'], [server.run]);
 });
 
 gulp.task('default', ['bundle-client', 'css', 'server']);
