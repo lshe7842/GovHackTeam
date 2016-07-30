@@ -61,10 +61,11 @@ app.get('/api/gearing', function(req, res, next) {
 var stream = fs.createReadStream("./data/ato/GEARING-SA.csv");
 var gearingArray = [];
 var saSummary = null;
-console.log("***** starting to load gearing data:" + new Date());
+Log("***** Start loading gearing data");
 csv
  .fromStream(stream, {headers: true})
  .on("data", function(data){
+	  if(!data["input.SA4"]) return;
 		gearingArray.push({sex: data["input.Sex"],
 												age: data["input.AGE"],
 												occupation: data["input.Occupation"],
@@ -74,12 +75,7 @@ csv
 											});
  })
  .on("end", function(){
-		 console.log("***** done loading gearing data:" + new Date());
-		 console.log("***** Row Count:" + gearingArray.length);
-
-		 _.each(gearingArray, function(row) {
-			 if(!row.sa4) console.log(row);
-		 })
+		 Log("***** Done loading gearing data");
 
 		 var result = _.reduce(gearingArray, function(aggregate, row) {
 			//  console.log(row);
@@ -103,6 +99,12 @@ csv
 		})
 
  });
+
+
+function Log(text) {
+	console.log(new Date() + ": " + text);
+}
+
 
 var port = process.env.PORT || 3000;
 app.listen(port);
