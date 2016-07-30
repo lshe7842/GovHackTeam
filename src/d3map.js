@@ -8,7 +8,7 @@ var D3Map ={
         var h = 600;
         var strokeWidth = "0.7px";
 
-        
+
         //Define map projection
         var projection = d3.geo.mercator()
             .translate([0, 0])
@@ -51,7 +51,7 @@ var D3Map ={
         var g = svg.append("g")
             .style("stroke-width", strokeWidth)
             .style("vector-effect", "non-scaling-stroke");
-            
+
         var active = d3.select(null);
         //Load in GeoJSON data
         d3.json("data/SA4_2011_AUST.json", function(json) {
@@ -67,8 +67,9 @@ var D3Map ={
             projection.scale(s)
                 .translate(t);
             //Bind data and create one path per GeoJSON feature
+            
             g.selectAll("path")
-                .data(json.geometries)
+                .data(json.features)
                 .enter()
                 .append("path")
                 .attr("d", path)
