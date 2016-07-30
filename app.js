@@ -53,13 +53,14 @@ app.get('/api/gearing', function(req, res, next) {
 		res.json({"invalid": "request"})
 	} else {
 
-		res.json(gearingArray);
+		res.json(saSummary);
 	}
 })
 
 //return data for the whole country
-var stream = fs.createReadStream("./data/ato/GEARING-SA-50.csv");
+var stream = fs.createReadStream("./data/ato/GEARING-SA.csv");
 var gearingArray = [];
+var saSummary = null;
 console.log("***** starting to load gearing data:" + new Date());
 csv
  .fromStream(stream, {headers: true})
@@ -72,11 +73,35 @@ csv
 												gearingFlag: data["GEARINGFLAG"],
 											});
  })
- .on("data-invalid", function(data) {
-	 return false;
- })
  .on("end", function(){
 		 console.log("***** done loading gearing data:" + new Date());
+		 console.log("***** Row Count:" + gearingArray.length);
+
+		 _.each(gearingArray, function(row) {
+			 if(!row.sa4) console.log(row);
+		 })
+
+		 var result = _.reduce(gearingArray, function(aggregate, row) {
+			//  console.log(row);
+			 if(!row.sa4) return aggregate;
+			 if(!aggregate[row.sa4]) {
+				 aggregate[row.sa4] = {sa4: row.sa4, positivelyGeared: 0, negativelyGeared: 0, neutralGeared: 0};
+			 }
+			 if(row.gearing > 0) aggregate[row.sa4].positivelyGeared++;
+			 else if(row.gearing < 0) aggregate[row.sa4].negativelyGeared++;
+			 else aggregate[row.sa4].neutralGeared++;
+		  return aggregate;
+		}, {});
+
+
+		result = _.toArray(result);
+		saSummary = _.each(result, function(row) {
+			var count = row.positivelyGeared + row.negativelyGeared + row.neutralGeared;
+			row.positivelyGeared = row.positivelyGeared * 1.0 / count;
+			row.negativelyGeared = row.negativelyGeared * 1.0 / count;
+			row.neutralGeared = row.neutralGeared * 1.0 / count;
+		})
+
  });
 
 var port = process.env.PORT || 3000;
