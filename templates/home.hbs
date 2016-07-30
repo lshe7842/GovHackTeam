@@ -1,4 +1,18 @@
 <div class="gh-header">
-	<h2>Hack the GovHack</h2>
+	<h2>LEGION</h2>
 </div>
-<div id="chart" class="center-align"></div>
+<div class="main container">
+	<div id="chart" class="center-align"></div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		window.addEventListener('scroll', function(e){
+			if(window.scrollY >= 100){
+				$('.gh-header').addClass('shrinked');
+			}else{
+				$('.gh-header').removeClass('shrinked');
+			}
+		});
+	});
+</script>
