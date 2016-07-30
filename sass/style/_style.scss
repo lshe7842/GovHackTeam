@@ -1,56 +1,43 @@
 html {
-	background-color: #ffffef;
+	// background: linear-gradient( to left top, blue, red);
+	// background-color: #fbfbfb;
+}
+
+.gh-header {
+	padding: 30px 0 30px 30px;
+	background-color: #3c3;
+	opacity: 0.5;
+	@include transition(padding, 0.2s);
+	position: fixed;
+	top: 0;
+    width: 100%;
+
+	h2 {
+	    margin: 0;
+	    font-size: 2em;
+	    font-family: 'Raleway', Arial, Open Sans;
+	}
+
+	&.shrinked {
+		padding-top: 20px;
+		padding-bottom: 20px;
+
+		h2 {
+			// font-size: 1.5em;
+		}
+	}
+}
+
+.main.container {
+	margin-top: 150px;
 }
 
 #chart {
 	.link {
-		@include transition(all, 0.2s);
+		@include transition(all, 0.3s);
+	}
+
+	.node rect {
 		cursor: pointer;
 	}
-}
-
-
-
-
-
-
-
-// choropleth
-.counties {
-  fill: none;
-}
-
-.states {
-  fill: none;
-  stroke: #fff;
-  stroke-linejoin: round;
-}
-
-.q0-9 { fill:rgb(247,251,255); }
-.q1-9 { fill:rgb(222,235,247); }
-.q2-9 { fill:rgb(198,219,239); }
-.q3-9 { fill:rgb(158,202,225); }
-.q4-9 { fill:rgb(107,174,214); }
-.q5-9 { fill:rgb(66,146,198); }
-.q6-9 { fill:rgb(33,113,181); }
-.q7-9 { fill:rgb(8,81,156); }
-.q8-9 { fill:rgb(8,48,107); }
-
-
-//zoomable map
-.overlay {
-  fill: none;
-  pointer-events: all;
-}
-
-.state {
-  fill: #aaa;
-}
-
-.county-border,
-.state-border {
-  fill: none;
-  stroke: #fff;
-  stroke-linejoin: round;
-  stroke-linecap: round;
 }
