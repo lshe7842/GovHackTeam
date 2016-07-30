@@ -2,18 +2,6 @@ var d3 = require('d3');
 
 var D3Map ={
 
-    generateData: function() {
-        var data = [];
-
-        data.push({ "lgaCode" : "49399", 
-                    "positive" : 50, 
-                    "negative" : 50});
-
-        return data;
-
-    },
-
-
     zoommap: function() {
         //Width and height
         var w = 900;
@@ -66,7 +54,8 @@ var D3Map ={
             
         var active = d3.select(null);
         //Load in GeoJSON data
-        d3.json("/data/aus_lga.json", function(json) {
+        d3.json("data/SA4_2011_AUST.json", function(json) {
+
             // Calculate bounding box transforms for entire collection
             var b = path.bounds(json),
                 s = .95 / Math.max((b[1][0] - b[0][0]) / w, (b[
@@ -79,7 +68,7 @@ var D3Map ={
                 .translate(t);
             //Bind data and create one path per GeoJSON feature
             g.selectAll("path")
-                .data(json.features)
+                .data(json.geometries)
                 .enter()
                 .append("path")
                 .attr("d", path)
@@ -90,7 +79,6 @@ var D3Map ={
                 .style("stroke", "#003300")
                 .style("fill", "#ffff99");
 
-            console.log(json.features[1]);
         });
 
 
