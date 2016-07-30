@@ -49,6 +49,7 @@ app.get('/api/gearing', function(req, res, next) {
 		//_.find(gearingArray, req.query.sa4);
 		//res.json({"object": _.find(gearingArray, req.query.sa4)})
 		//res.json(_.find(gearingArray, req.query.sa4))
+		console.log("**** search by sa4" + _.find(gearingArray, req.query.sa4));
 		res.json({"invalid": "request"})
 	} else {
 
@@ -57,7 +58,7 @@ app.get('/api/gearing', function(req, res, next) {
 })
 
 //return data for the whole country
-var stream = fs.createReadStream("./data/ato/GEARING.csv");
+var stream = fs.createReadStream("./data/ato/GEARING-SA-50.csv");
 var gearingArray = [];
 console.log("***** starting to load gearing data:" + new Date());
 csv
