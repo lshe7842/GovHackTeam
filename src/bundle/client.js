@@ -15,4 +15,4 @@ $('#btn-update-2').on('click', function(){
 });
 
 var D3Map = require('../d3map');
-D3Map.zoommap();
+D3Map.drawMap();

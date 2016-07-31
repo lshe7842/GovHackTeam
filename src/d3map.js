@@ -2,70 +2,90 @@ var d3 = require('d3');
 
 var D3Map ={
 
-    getDataLookup: function() {
-        var data = [];
+    drawMap: function() {
+        var data; // a global
 
-        data.push({ "saCode":"406",
-                    "positive": 20,
-                    "negative": 40 });
+        d3.json("/api/gearing", function(error, json) {
 
-        data.push({ "saCode":"315",
-                    "positive": 70,
-                    "negative": 10 }); 
+            if (error) return console.warn(error);
 
-        data.push({ "saCode":"508",
-                    "positive": 0,
-                    "negative": 80 }); 
+            data = json;
+            var dataLookup = [];
+            for (var i = data.length - 1; i >= 0; i--) {
+                     var datum = data[i];
+                     dataLookup["sa_" + datum.sa4] = datum;
+                }  
+            
+            D3Map.dataLookUp = dataLookup;
+            D3Map.zoommap();
+        });
 
-        var dataLookup = [];
-
-        for (var i = data.length - 1; i >= 0; i--) {
-                 var datum = data[i];
-                 dataLookup["sa_" + datum.saCode] = datum;
-            }       
-
-        return dataLookup;
-    },
+                },
 
     dataLookUp : undefined,
 
-    generateGradient: function(svg, positive, negative) {
-        var gradient = svg.append("defs")
-                          .append("linearGradient")
-                          .attr("id", "gradient")
-                          .attr("x1", "0%")
-                          .attr("y1", "0%")
-                          .attr("x2", "100%")
-                          .attr("y2", "100%")
-                          .attr("spreadMethod", "pad");
+    drawLegend: function(g) {
 
-        gradient.append("stop")
-                .attr("offset", "40%")
-                .attr("stop-color", "#33cc33")
-                .attr("stop-opacity", 1);
+        var x = 10, y = 170;
 
-        gradient.append("stop")
-                .attr("offset", "60%")
-                .attr("stop-color", "#ffff99")
-                .attr("stop-opacity", 1); 
+        g.append("text")
+         .attr("x", x)
+         .attr("y", y - 20)
+         .text("Positive gearing")
+         .attr("font-family", "sans-serif")
+         .style("fill", D3Map.generateFillColour(50))
+         .attr("font-size", "20px");
 
-        gradient.append("stop")
-                .attr("offset", "80%")
-                .attr("stop-color", "#FF8C00")
-                .attr("stop-opacity", 1);
+        g.append("rect")
+         .attr("x", x)
+         .attr("y", y)
+         .attr("width", 50)
+         .attr("height", 10)
+         .style("fill", D3Map.generateFillColour(50))
+         .style("stroke", "none"); 
 
+        y += 20;
 
+        for (var i = 50; i >= -50; i--) {
+            g.append("rect")
+             .attr("x", x)
+             .attr("y", y)
+             .attr("width", 50)
+             .attr("height", 2)
+             .style("fill", D3Map.generateFillColour(i))
+             .style("stroke", "none"); 
+
+             y += 2; 
+        }
+
+        y += 15;
+
+        g.append("rect")
+         .attr("x", x)
+         .attr("y", y)
+         .attr("width", 50)
+         .attr("height", 10)
+         .style("fill", D3Map.generateFillColour(-50))
+         .style("stroke", "none"); 
+
+         g.append("text")
+          .attr("x", x)
+          .attr("y", y + 40)
+          .text("Negative gearing")
+          .attr("font-family", "sans-serif")
+          .attr("font-size", "20px")
+          .style("fill", D3Map.generateFillColour(-50));
 
 
     },
 
-    generateFillColour: function(positive, negative){
+    
+    generateFillColour: function(gearing){
 
         var color = d3.scale.linear()
-                            .domain([-100, 0, 100])
-                            .range(["#FF8C00", "#ffff99", "#33cc33"]);
-        console.log(positive - negative);
-        return color(positive - negative);
+                            .domain([-50, 0, 50])
+                            .range(["#FF8C00", "white", "#1a75ff"]);
+        return color(gearing);
     },
 
     zoommap: function() {
@@ -88,8 +108,6 @@ var D3Map ={
             .append("svg")
             .attr("width", w)
             .attr("height", h);
-
-        D3Map.generateGradient(svg);
 
         svg.append("rect")
             .style("fill", "none")
@@ -117,10 +135,7 @@ var D3Map ={
             projection.scale(s)
                       .translate(t);
 
-            var dataLookUp = D3Map.getDataLookup();
-            D3Map.dataLookUp = dataLookUp;
             //Bind data and create one path per GeoJSON feature
-
 
             g.selectAll("path")
                 .data(json.features)
@@ -135,15 +150,14 @@ var D3Map ={
                 .style("vector-effect", "non-scaling-stroke")
                 .style("stroke", "#003300")
                 .style("fill", function(d) {
-                                   var data = dataLookUp["sa_" + d.properties.SA4_CODE11];
-                                   data = data ? data : {"positive" : 50, "negative" : 50};
-                                   return D3Map.generateFillColour(data.positive, data.negative);
+                                   var data = D3Map.dataLookUp["sa_" + d.properties.SA4_CODE11];
+                                   data = data ? data : {"positivelyGeared" : 0, "negativelyGeared" : 0};
+                                   return D3Map.generateFillColour(data.positivelyGeared - data.negativelyGeared);
                                 });
 
-        });
+            });
 
-        
-
+        D3Map.drawLegend(g);
 
         function clicked(d) {
             if (active.node() === this) return reset();
@@ -188,8 +202,8 @@ var D3Map ={
                 .style("vector-effect", "non-scaling-stroke")
                 .style("fill", function(d) {
                                    var data = D3Map.dataLookUp["sa_" + d.properties.SA4_CODE11];
-                                   data = data ? data : {"positive" : 50, "negative" : 50};
-                                   return D3Map.generateFillColour(data.positive, data.negative);
+                                   data = data ? data : {"positivelyGeared" : 0, "negativelyGeared" : 0};
+                                   return D3Map.generateFillColour(data.positivelyGeared - data.negativelyGeared);
                                 })
                 .style("stroke-width", strokeWidth);
         }
