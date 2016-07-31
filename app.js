@@ -93,9 +93,9 @@ csv
 		result = _.toArray(result);
 		saSummary = _.each(result, function(row) {
 			var count = row.positivelyGeared + row.negativelyGeared + row.neutralGeared;
-			row.positivelyGeared = row.positivelyGeared * 1.0 / count;
-			row.negativelyGeared = row.negativelyGeared * 1.0 / count;
-			row.neutralGeared = row.neutralGeared * 1.0 / count;
+			row.positivelyGeared = Math.round(row.positivelyGeared * 100 / count);
+			row.negativelyGeared = Math.round(row.negativelyGeared * 100 / count);
+			row.neutralGeared = Math.round(row.neutralGeared * 100 / count);
 		})
 
  });
