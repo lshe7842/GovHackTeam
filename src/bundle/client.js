@@ -5,4 +5,4 @@ Engine.init();
 Engine.sankeyDemo(850, 600);
 
 var D3Map = require('../d3map');
-D3Map.zoommap();
+D3Map.drawMap();
