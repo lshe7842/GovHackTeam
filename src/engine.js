@@ -1,10 +1,22 @@
 var _ = require('lodash'),
 	d3 = require('d3');
 
+var allByOccupation = require('../ad-hoc/sankey-all-by-occupation.json');
+var allByAge = require('../ad-hoc/sankey-all-by-age.json');
+var allBySex = require('../ad-hoc/sankey-all-by-sex.json');
+
 var energy;
+var config = {sa4: "", category: "occupation"};
 
 var Engine = {
-	config: {},
+	setSA4: function(newVal, refresh) {
+		config.sa4 = newVal;
+		if(refresh) this.sankeySA();
+	},
+	setCategory: function(newVal, refresh) {
+		config.category = newVal;
+		if(refresh) this.sankeySA();
+	},
 	desc: 'Graph engine for GovHack app.',
 	plot: function(data){
 		// Plot logic here.
@@ -304,15 +316,29 @@ var Engine = {
 		  return sankey;
 		};
 	},
-	sankeySA: function(pW, pH, code, group){
-		energy = require('./get-sankey-data-by-sa')(code, group);
-		this.plotSankey(pW, pH);
+	sankeySA: function(conf){
+		conf = config;
+		console.log('calling sankeySA with: ' + JSON.stringify(conf));
+
+		if(conf.sa4=="" || !conf.sa4) {
+			console.log('using all data');
+			if(conf.category=="occupation") energy = allByOccupation;
+			if(conf.category=="age") energy = allByAge;
+			if(conf.category=="sex") energy = allBySex;
+		} else {
+			energy = require('./get-sankey-data-by-sa')(conf.sa4, conf.category);
+		}
+
+		this.plotSankey();
 	},
-	sankeyDemo: function(pW, pH){
+	sankeyDemo: function(){
 		energy = require('../ad-hoc/sankey-all-by-occupation.json');
-		this.plotSankey(pW, pH);
+		this.plotSankey();
 	},
-	plotSankey: function(pW, pH){
+	plotSankey: function(){
+		pW = 850;
+		pH = 600;
+
 		d3.select("#chart")
 		.selectAll('svg')
 		.transition()

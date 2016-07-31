@@ -1,17 +1,19 @@
 // Main entry for the app
 var Engine = require('../engine');
 Engine.init();
-Engine.sankeySA(850, 600, "101", "occupation");
+Engine.sankeySA();
 // Engine.sankeyDemo(850, 600);
 
-$('#btn-update-1').on('click', function(){
-  console.log('testing')
-  Engine.sankeySA(850, 600, "101", "age");
+$('#btn-update-gender').on('click', function(){
+  Engine.setCategory("sex", true);
 });
 
-$('#btn-update-2').on('click', function(){
-  console.log('testing2')
-  Engine.sankeyDemo(850, 600);
+$('#btn-update-age').on('click', function(){
+  Engine.setCategory("age", true);
+});
+
+$('#btn-update-occupation').on('click', function(){
+  Engine.setCategory("occupation", true);
 });
 
 var D3Map = require('../d3map');
