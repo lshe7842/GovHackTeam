@@ -341,8 +341,6 @@ var Engine = {
 
 		d3.select("#chart")
 		.selectAll('svg')
-		.transition()
-		.style("opacity", 0)
 		.remove();
 
 		var margin = {top: 1, right: 1, bottom: 6, left: 1},
