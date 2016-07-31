@@ -309,7 +309,7 @@ var Engine = {
 		this.plotSankey(pW, pH);
 	},
 	sankeyDemo: function(pW, pH){
-		energy = require('../ad-hoc/sankey-all-by-oc.json');
+		energy = require('../ad-hoc/sankey-all-by-occupation.json');
 		this.plotSankey(pW, pH);
 	},
 	plotSankey: function(pW, pH){

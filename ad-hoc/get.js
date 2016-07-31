@@ -19,59 +19,24 @@ csv
 						});
  })
  .on("end", function(){
+ 	var group = [process.argv[2]];
  	var result = _.reduce(gearingArray, function(aggregate, row) {
-			 if(!row.sex) return aggregate;
+			 if(!row[group]) return aggregate;
 
-			 if(!aggregate[row.sex]) {
-			 	if(process.argv.length > 2 && process.argv[2] === "oc"){
-			 		aggregate[row.sex] = { total: 0, occp: {}};
-			 	}else{
-				 	aggregate[row.sex] = { total: 0, ages: {}};
-			 	}
-			 }
-
-		 	if(process.argv.length > 2 && process.argv[2] === "oc"){
-		 		// By occupation
-		 		aggregateOccp(aggregate[row.sex]);
-		 	}else{
-		 		// By age
-		 		aggregateAge(aggregate[row.sex]);
-		 	}
-
-		 	function aggregateOccp(entity) {
-			 	if(!entity.occp[row.occupation]){
-				 	entity.occp[row.occupation] = {
-				 		total: 0,
-				 		ng: 0,
-				 		pg: 0,
-				 		nug: 0,
-				 		ng1: 0, ng2: 0, ng3: 0, ng4: 0,
-				 		pg1: 0, pg2: 0, pg3: 0, pg4: 0
-				 	};
-				 }else{
-				 	aggregateGear(entity.occp[row.occupation]);
-				 }
-			 }
-
-			 function aggregateAge(entity) {
-			 	if(!entity.ages[row.age]){
-				 	entity.ages[row.age] = {
-				 		total: 0,
-				 		ng: 0,
-				 		pg: 0,
-				 		nug: 0,
-				 		ng1: 0, ng2: 0, ng3: 0, ng4: 0,
-				 		pg1: 0, pg2: 0, pg3: 0, pg4: 0
-				 	};
-				 }else{
-				 	aggregateGear(entity.ages[row.age]);
-				 }
+			 if(!aggregate[row[group]]) {
+		 		aggregate[row[group]] = { total: 0, 
+		 			ng: 0,
+			 		pg: 0,
+			 		nug: 0,
+			 		ng1: 0, ng2: 0, ng3: 0, ng4: 0,
+			 		pg1: 0, pg2: 0, pg3: 0, pg4: 0};
+			 }else{
+			 	aggregateGear(aggregate[row[group]]);
 			 }
 
 			 function aggregateGear(entity) {
 			 	if(row.gearing > 0) {
 			 		aggregate.total++;
-			 		aggregate[row.sex].total++;
 			 		entity.total++;
 
 			 		entity.pg++;
@@ -86,7 +51,6 @@ csv
 			 		}
 			 	}else if(row.gearing < 0){
 			 		aggregate.total++;
-			 		aggregate[row.sex].total++;
 			 		entity.total++;
 
 			 		entity.ng++;
@@ -99,7 +63,7 @@ csv
 			 		}else{
 			 			entity.ng4++;
 			 		}
-			 	}else entity.nug++;
+			 	}
 			 }
 
 		  return aggregate;
@@ -109,11 +73,7 @@ csv
 		// result = _.toArray(result);
 
 		var file;
-		if(process.argv.length > 2 && process.argv[2] === "oc"){
-			file = './ad-hoc/all-by-oc.json';
-		}else{
-		 	file = './ad-hoc/all-by-age.json';
-		}
+		file = './ad-hoc/all-by-' + group + '.json';
 		jsonfile.writeFile(file, result, {spaces: 2}, function(err) {
 		  console.error('Error:' + err);
 		});

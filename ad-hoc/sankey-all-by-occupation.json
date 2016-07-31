@@ -1,0 +1,465 @@
+{
+  "nodes": [
+    {
+      "name": "Geared population"
+    },
+    {
+      "name": "Clerical and Administrative Workers"
+    },
+    {
+      "name": "Community and Personal Service Workers"
+    },
+    {
+      "name": "Labourers"
+    },
+    {
+      "name": "Machinery operators and drivers"
+    },
+    {
+      "name": "Managers"
+    },
+    {
+      "name": "Other"
+    },
+    {
+      "name": "Professionals"
+    },
+    {
+      "name": "Sales workers"
+    },
+    {
+      "name": "Technicians and Trades Workers"
+    },
+    {
+      "name": "0-10k"
+    },
+    {
+      "name": "10-30k"
+    },
+    {
+      "name": "30-70k"
+    },
+    {
+      "name": "Over 70k"
+    },
+    {
+      "name": "0 - -10k"
+    },
+    {
+      "name": "-10k - -30k"
+    },
+    {
+      "name": "-30k - -70k"
+    },
+    {
+      "name": "Over -70k"
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 7,
+      "value": 8752
+    },
+    {
+      "source": 7,
+      "target": 14,
+      "value": 4271
+    },
+    {
+      "source": 7,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 7,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 7,
+      "target": 17,
+      "value": 1915
+    },
+    {
+      "source": 7,
+      "target": 10,
+      "value": 2039
+    },
+    {
+      "source": 7,
+      "target": 11,
+      "value": 469
+    },
+    {
+      "source": 7,
+      "target": 12,
+      "value": 56
+    },
+    {
+      "source": 7,
+      "target": 13,
+      "value": 2
+    },
+    {
+      "source": 0,
+      "target": 6,
+      "value": 12127
+    },
+    {
+      "source": 6,
+      "target": 14,
+      "value": 3707
+    },
+    {
+      "source": 6,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 6,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 6,
+      "target": 17,
+      "value": 1223
+    },
+    {
+      "source": 6,
+      "target": 10,
+      "value": 4605
+    },
+    {
+      "source": 6,
+      "target": 11,
+      "value": 2050
+    },
+    {
+      "source": 6,
+      "target": 12,
+      "value": 500
+    },
+    {
+      "source": 6,
+      "target": 13,
+      "value": 42
+    },
+    {
+      "source": 0,
+      "target": 1,
+      "value": 4836
+    },
+    {
+      "source": 1,
+      "target": 14,
+      "value": 2543
+    },
+    {
+      "source": 1,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 1,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 1,
+      "target": 17,
+      "value": 721
+    },
+    {
+      "source": 1,
+      "target": 10,
+      "value": 1243
+    },
+    {
+      "source": 1,
+      "target": 11,
+      "value": 287
+    },
+    {
+      "source": 1,
+      "target": 12,
+      "value": 41
+    },
+    {
+      "source": 1,
+      "target": 13,
+      "value": 1
+    },
+    {
+      "source": 0,
+      "target": 8,
+      "value": 1398
+    },
+    {
+      "source": 8,
+      "target": 14,
+      "value": 751
+    },
+    {
+      "source": 8,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 8,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 8,
+      "target": 17,
+      "value": 178
+    },
+    {
+      "source": 8,
+      "target": 10,
+      "value": 393
+    },
+    {
+      "source": 8,
+      "target": 11,
+      "value": 66
+    },
+    {
+      "source": 8,
+      "target": 12,
+      "value": 10
+    },
+    {
+      "source": 8,
+      "target": 13,
+      "value": 0
+    },
+    {
+      "source": 0,
+      "target": 5,
+      "value": 5559
+    },
+    {
+      "source": 5,
+      "target": 14,
+      "value": 2588
+    },
+    {
+      "source": 5,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 5,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 5,
+      "target": 17,
+      "value": 1345
+    },
+    {
+      "source": 5,
+      "target": 10,
+      "value": 1205
+    },
+    {
+      "source": 5,
+      "target": 11,
+      "value": 345
+    },
+    {
+      "source": 5,
+      "target": 12,
+      "value": 72
+    },
+    {
+      "source": 5,
+      "target": 13,
+      "value": 4
+    },
+    {
+      "source": 0,
+      "target": 3,
+      "value": 1344
+    },
+    {
+      "source": 3,
+      "target": 14,
+      "value": 715
+    },
+    {
+      "source": 3,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 3,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 3,
+      "target": 17,
+      "value": 176
+    },
+    {
+      "source": 3,
+      "target": 10,
+      "value": 382
+    },
+    {
+      "source": 3,
+      "target": 11,
+      "value": 63
+    },
+    {
+      "source": 3,
+      "target": 12,
+      "value": 8
+    },
+    {
+      "source": 3,
+      "target": 13,
+      "value": 0
+    },
+    {
+      "source": 0,
+      "target": 4,
+      "value": 1389
+    },
+    {
+      "source": 4,
+      "target": 14,
+      "value": 747
+    },
+    {
+      "source": 4,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 4,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 4,
+      "target": 17,
+      "value": 282
+    },
+    {
+      "source": 4,
+      "target": 10,
+      "value": 320
+    },
+    {
+      "source": 4,
+      "target": 11,
+      "value": 36
+    },
+    {
+      "source": 4,
+      "target": 12,
+      "value": 4
+    },
+    {
+      "source": 4,
+      "target": 13,
+      "value": 0
+    },
+    {
+      "source": 0,
+      "target": 9,
+      "value": 3236
+    },
+    {
+      "source": 9,
+      "target": 14,
+      "value": 1749
+    },
+    {
+      "source": 9,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 9,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 9,
+      "target": 17,
+      "value": 624
+    },
+    {
+      "source": 9,
+      "target": 10,
+      "value": 695
+    },
+    {
+      "source": 9,
+      "target": 11,
+      "value": 145
+    },
+    {
+      "source": 9,
+      "target": 12,
+      "value": 23
+    },
+    {
+      "source": 9,
+      "target": 13,
+      "value": 0
+    },
+    {
+      "source": 0,
+      "target": 2,
+      "value": 1956
+    },
+    {
+      "source": 2,
+      "target": 14,
+      "value": 1123
+    },
+    {
+      "source": 2,
+      "target": 15,
+      "value": 0
+    },
+    {
+      "source": 2,
+      "target": 16,
+      "value": 0
+    },
+    {
+      "source": 2,
+      "target": 17,
+      "value": 307
+    },
+    {
+      "source": 2,
+      "target": 10,
+      "value": 436
+    },
+    {
+      "source": 2,
+      "target": 11,
+      "value": 77
+    },
+    {
+      "source": 2,
+      "target": 12,
+      "value": 13
+    },
+    {
+      "source": 2,
+      "target": 13,
+      "value": 0
+    }
+  ]
+}

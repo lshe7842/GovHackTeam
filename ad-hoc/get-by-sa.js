@@ -19,68 +19,39 @@ csv
 						});
  })
  .on("end", function(){
+ 	var group = [process.argv[2]];
  	var result = _.reduce(gearingArray, function(aggregate, row) {
 			 if(!row.sa4) return aggregate;
 			 if(!aggregate[row.sa4]) {
-			 	if(process.argv.length > 2 && process.argv[2] === "oc"){
-			 		aggregate[row.sa4] = {sa4: row.sa4, male: { total: 0, occp: {}}, female: { total: 0, occp: {}}};
-			 	}else{
-				 	aggregate[row.sa4] = {sa4: row.sa4, male: { total: 0, ages: {}}, female: { total: 0, ages: {}}};
-			 	}
-			 }
+			 	// New SA
+			 	aggregate[row.sa4] = {sa4: row.sa4};
 
-			 if(row.sex == "Male"){
-			 	aggregate[row.sa4].male.total++;
-
-			 	if(process.argv.length > 2 && process.argv[2] === "oc"){
-			 		aggregateOccp(aggregate[row.sa4].male);
-			 	}else{
-			 		aggregateAge(aggregate[row.sa4].male);
-			 	}
+			 	aggregate[row.sa4][row[group]] = { total: 0, 
+		 			ng: 0,
+			 		pg: 0,
+			 		nug: 0,
+			 		ng1: 0, ng2: 0, ng3: 0, ng4: 0,
+			 		pg1: 0, pg2: 0, pg3: 0, pg4: 0};
 			 }else{
-			 	aggregate[row.sa4].female.total++;
-
-			 	if(process.argv.length > 2 && process.argv[2] === "oc"){
-			 		aggregateOccp(aggregate[row.sa4].female);
-			 	}else{
-			 		aggregateAge(aggregate[row.sa4].female);
-			 	}
-			 }
-
-			 function aggregateOccp(entity) {
-			 	if(!entity.occp[row.occupation]){
-				 	entity.occp[row.occupation] = {
-				 		total: 0,
-				 		ng: 0,
+			 	// Existing SA
+			 	if(!aggregate[row.sa4][row[group]]){
+			 		// New group
+			 		aggregate[row.sa4][row[group]] = { total: 0, 
+			 			ng: 0,
 				 		pg: 0,
 				 		nug: 0,
 				 		ng1: 0, ng2: 0, ng3: 0, ng4: 0,
-				 		pg1: 0, pg2: 0, pg3: 0, pg4: 0
-				 	};
-				 }else{
-				 	entity.occp[row.occupation].total++;
-				 	aggregateGear(entity.occp[row.occupation]);
-				 }
-			 }
-
-			 function aggregateAge(entity) {
-			 	if(!entity.ages[row.age]){
-				 	entity.ages[row.age] = {
-				 		total: 0,
-				 		ng: 0,
-				 		pg: 0,
-				 		nug: 0,
-				 		ng1: 0, ng2: 0, ng3: 0, ng4: 0,
-				 		pg1: 0, pg2: 0, pg3: 0, pg4: 0
-				 	};
-				 }else{
-				 	entity.ages[row.age].total++;
-				 	aggregateGear(entity.ages[row.age]);
-				 }
+				 		pg1: 0, pg2: 0, pg3: 0, pg4: 0};
+				 	}else{
+				 		// Existing group
+				 		aggregateGear(aggregate[row.sa4][row[group]]);
+				 	}
 			 }
 
 			 function aggregateGear(entity) {
 			 	if(row.gearing > 0) {
+			 		entity.total++;
+
 			 		entity.pg++;
 			 		if(row.gearing > 0 && row.gearing <= 10000){
 			 			entity.pg1++;
@@ -92,6 +63,8 @@ csv
 			 			entity.pg4++;
 			 		}
 			 	}else if(row.gearing < 0){
+			 		entity.total++;
+
 			 		entity.ng++;
 			 		if(row.gearing < 0 && row.gearing >= -10000){
 			 			entity.ng1++;
@@ -102,7 +75,7 @@ csv
 			 		}else{
 			 			entity.ng4++;
 			 		}
-			 	}else entity.nug++;
+			 	}
 			 }
 
 		  return aggregate;
@@ -111,12 +84,7 @@ csv
  		// console.log(result);
 		result = _.toArray(result);
 
-		var file;
-		if(process.argv.length > 2 && process.argv[2] === "oc"){
-			file = './ad-hoc/by-sa-by-oc.json';
-		}else{
-		 	file = './ad-hoc/by-sa-by-age.json';
-		}
+		var file = './ad-hoc/by-sa-by-' + group + '.json';
 		jsonfile.writeFile(file, result, {spaces: 2}, function(err) {
 		  console.error('Error:' + err);
 		});
