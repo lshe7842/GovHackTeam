@@ -8,6 +8,15 @@ var allBySex = require('../ad-hoc/sankey-all-by-sex.json');
 var energy;
 var config = {sa4: "", category: "occupation"};
 
+var tooltip = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("a simple tooltip");
+
+
+
 var Engine = {
 	setSA4: function(newVal, refresh) {
 		config.sa4 = newVal;
@@ -405,10 +414,15 @@ var Engine = {
 				      .attr("class", "link")
 				      .attr("d", path)
 				      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-				      .sort(function(a, b) { return b.dy - a.dy; });
+				      .sort(function(a, b) { return b.dy - a.dy; })
+							.on("mouseover", function(d){return tooltip
+																									.style("visibility", "visible")
+																									.text(function() { console.log(d); return d.source.name + " → " + d.target.name + "\n" + format(d.value); });})
+							.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+							.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
-				  link.append("title")
-				      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+				  // link.append("title")
+				  //     .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
 
 				  var node = svg.append("g").selectAll(".node")
 				      .data(data.nodes)
