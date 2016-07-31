@@ -43,6 +43,12 @@ html {
     	    line-height: 2em;
 	    }
 	}
+
+	.card-action {
+		p {
+			font-size: 1.5em;
+		}
+	}
 }
 
 .main {
@@ -54,6 +60,29 @@ html {
     margin-top: 50px;
     // box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
     // opacity: 0.9;
+
+    .help {
+    	@include display(flex);
+    	@include align-items(center);
+    	@include justify-content(center);
+    	color: #38c;
+    	margin-bottom: 50px;
+
+    	i {
+    		margin-right: 10px;
+    	}
+    }
+
+    .button-group {
+    	margin-bottom: 30px;
+
+    	.btn {
+    		margin: 0 5px;
+    		&:focus {
+    			background-color: #38c !important;
+    		}
+    	}
+    }
 }
 
 #chart {
