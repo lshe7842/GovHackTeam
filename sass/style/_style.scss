@@ -11,6 +11,7 @@ html {
 	box-shadow: 0 1px 5px rgba(0,0,0,.1);
 	@include transition(padding, 0.2s);
 	position: fixed;
+	z-index: 100;
 	top: 0;
     width: 100%;
 
