@@ -14,7 +14,8 @@ module.exports = function(code, group){
 	}
 
 	data = _.find(data, function(o){return o.sa4 == code;});
-	delete data.sa4;
+	workData = _.cloneDeep(data);
+	delete workData.sa4;
 
 	var gearMap = {
 		// "nug": "0",
@@ -94,16 +95,16 @@ module.exports = function(code, group){
 		};
 	}
 
-	for(var prop in data){
+	for(var prop in workData){
 		// Age group or occp type
 		result.links.push({"source": 0, 
 			"target": _.findIndex(result.nodes, function(o){return o.name == prop;}), 
-			"value": data[prop].total});
+			"value": workData[prop].total});
 		// Gear
 		for(var gear in gearMap){
 			result.links.push({"source": _.findIndex(result.nodes, function(o){return o.name == prop;}), 
 				"target": _.findIndex(result.nodes, function(o){return o.name == gearMap[gear];}), 
-				"value": data[prop][gear]});
+				"value": workData[prop][gear]});
 		}
 	}
 
