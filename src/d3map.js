@@ -24,6 +24,8 @@ var D3Map ={
 
     dataLookUp : undefined,
 
+    regionTextLocation : undefined,
+
     drawLegend: function(g) {
 
         var x = 10, y = 170;
@@ -77,6 +79,37 @@ var D3Map ={
           .style("fill", D3Map.generateFillColour(-50));
 
 
+    },
+
+    showRegionLabel: function(node, d, g) {
+
+        if (D3Map.regionTextLocation) {
+            D3Map.regionTextLocation.text("");
+        }
+
+        var bbox = node.getBBox();
+        var coords = { "x" : (bbox.x + bbox.width/2), 
+                       "y" : (bbox.y + bbox.height/2) 
+                      };
+
+        console.log(coords);
+
+       var elem = document.getElementById("label");
+       elem.innerHTML = "Region: " + d.properties.SA4_NAME11;
+
+
+       /*D3Map.regionTextLocation =  g.append("text")
+                                    .attr("x", coords.x)
+                                    .attr("y", coords.y)
+                                    .text(d.properties.SA4_NAME11)
+                                    .attr("font-family", "sans-serif")
+                                    .attr("font-size", "10px")
+                                    .style("fill", "#1a1a1a");*/
+
+      
+
+
+          
     },
 
     
@@ -185,7 +218,8 @@ var D3Map ={
                 .style("stroke-width", strokeWidth);
 
             active.style("stroke-width", "2px");
-            console.log(d.properties);
+            
+            D3Map.showRegionLabel(this, d, g);
         }
 
         function reset() {
@@ -206,6 +240,10 @@ var D3Map ={
                                    return D3Map.generateFillColour(data.positivelyGeared - data.negativelyGeared);
                                 })
                 .style("stroke-width", strokeWidth);
+
+
+                var elem = document.getElementById("label");
+                elem.innerHTML = "Region: Australia";
         }
     }
 }
