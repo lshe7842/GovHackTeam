@@ -1,4 +1,5 @@
 var d3 = require('d3');
+var Engine = require('./engine');
 
 var D3Map ={
 
@@ -14,8 +15,8 @@ var D3Map ={
             for (var i = data.length - 1; i >= 0; i--) {
                      var datum = data[i];
                      dataLookup["sa_" + datum.sa4] = datum;
-                }  
-            
+                }
+
             D3Map.dataLookUp = dataLookup;
             D3Map.zoommap();
         });
@@ -44,7 +45,7 @@ var D3Map ={
          .attr("width", 50)
          .attr("height", 10)
          .style("fill", D3Map.generateFillColour(50))
-         .style("stroke", "none"); 
+         .style("stroke", "none");
 
         y += 20;
 
@@ -55,9 +56,9 @@ var D3Map ={
              .attr("width", 50)
              .attr("height", 2)
              .style("fill", D3Map.generateFillColour(i))
-             .style("stroke", "none"); 
+             .style("stroke", "none");
 
-             y += 2; 
+             y += 2;
         }
 
         y += 15;
@@ -68,7 +69,7 @@ var D3Map ={
          .attr("width", 50)
          .attr("height", 10)
          .style("fill", D3Map.generateFillColour(-50))
-         .style("stroke", "none"); 
+         .style("stroke", "none");
 
          g.append("text")
           .attr("x", x)
@@ -98,13 +99,7 @@ var D3Map ={
        elem.innerHTML = "Region: " + d.properties.SA4_NAME11;
 
 
-       /*D3Map.regionTextLocation =  g.append("text")
-                                    .attr("x", coords.x)
-                                    .attr("y", coords.y)
-                                    .text(d.properties.SA4_NAME11)
-                                    .attr("font-family", "sans-serif")
-                                    .attr("font-size", "10px")
-                                    .style("fill", "#1a1a1a");*/
+      
 
       
 
@@ -128,7 +123,7 @@ var D3Map ={
         var strokeWidth = "0.7px";
 
         console.log("Hi");
-        
+
         //Define map projection
         var projection = d3.geo.mercator()
             .translate([0, 0])
@@ -220,6 +215,9 @@ var D3Map ={
             active.style("stroke-width", "2px");
             
             D3Map.showRegionLabel(this, d, g);
+
+
+            Engine.setSA4(d.properties.SA4_CODE11, true);
         }
 
         function reset() {
@@ -244,6 +242,8 @@ var D3Map ={
 
                 var elem = document.getElementById("label");
                 elem.innerHTML = "Region: Australia";
+
+            Engine.setSA4("", true);
         }
     }
 }

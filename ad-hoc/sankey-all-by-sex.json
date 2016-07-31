@@ -1,0 +1,129 @@
+{
+  "nodes": [
+    {
+      "name": "Geared population"
+    },
+    {
+      "name": "Male"
+    },
+    {
+      "name": "Female"
+    },
+    {
+      "name": "0-10k"
+    },
+    {
+      "name": "10-30k"
+    },
+    {
+      "name": "30-70k"
+    },
+    {
+      "name": "Over 70k"
+    },
+    {
+      "name": "0 - -10k"
+    },
+    {
+      "name": "-10k - -30k"
+    },
+    {
+      "name": "-30k - -70k"
+    },
+    {
+      "name": "Over -70k"
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 1,
+      "value": 21355
+    },
+    {
+      "source": 1,
+      "target": 7,
+      "value": 9291
+    },
+    {
+      "source": 1,
+      "target": 8,
+      "value": 0
+    },
+    {
+      "source": 1,
+      "target": 9,
+      "value": 0
+    },
+    {
+      "source": 1,
+      "target": 10,
+      "value": 4359
+    },
+    {
+      "source": 1,
+      "target": 3,
+      "value": 5591
+    },
+    {
+      "source": 1,
+      "target": 4,
+      "value": 1743
+    },
+    {
+      "source": 1,
+      "target": 5,
+      "value": 344
+    },
+    {
+      "source": 1,
+      "target": 6,
+      "value": 27
+    },
+    {
+      "source": 0,
+      "target": 2,
+      "value": 19243
+    },
+    {
+      "source": 2,
+      "target": 7,
+      "value": 8903
+    },
+    {
+      "source": 2,
+      "target": 8,
+      "value": 0
+    },
+    {
+      "source": 2,
+      "target": 9,
+      "value": 0
+    },
+    {
+      "source": 2,
+      "target": 10,
+      "value": 2412
+    },
+    {
+      "source": 2,
+      "target": 3,
+      "value": 5727
+    },
+    {
+      "source": 2,
+      "target": 4,
+      "value": 1796
+    },
+    {
+      "source": 2,
+      "target": 5,
+      "value": 383
+    },
+    {
+      "source": 2,
+      "target": 6,
+      "value": 22
+    }
+  ]
+}

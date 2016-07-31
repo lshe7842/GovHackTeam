@@ -3,33 +3,50 @@ var jsonfile = require('jsonfile'),
 
 module.exports = function(code, group){
 
-	var data;
+	var result, data;
+
 	if(group === "age"){
 		data = require('../ad-hoc/by-sa-by-age.json');
-	}else if(group === "oc"){
-		data = require('../ad-hoc/by-sa-by-oc.json');
+	}else if(group === "sex"){
+		data = require('../ad-hoc/by-sa-by-sex.json');
+	}else {
+		data = require('../ad-hoc/by-sa-by-occupation.json');
 	}
-	data = _.find(data, function(o){return o.sa4 == code;});
 
-	var result;
+	data = _.find(data, function(o){return o.sa4 == code;});
+	workData = _.cloneDeep(data);
+	delete workData.sa4;
 
 	var gearMap = {
 		// "nug": "0",
-	    "ng1": "0 - -1k",
-	    "ng2": "-1k - -3k",
-	    "ng3": "-3k - -7k",
-	    "ng4": "Over -7k",
-	    "pg1": "0-1k",
-	    "pg2": "1-3k",
-	    "pg3": "3-7k",
-	    "pg4": "Over 7k"
+	    "ng1": "0 - -10k",
+	    "ng2": "-10k - -30k",
+	    "ng3": "-30k - -70k",
+	    "ng4": "Over -70k",
+	    "pg1": "0-10k",
+	    "pg2": "10-30k",
+	    "pg3": "30-70k",
+	    "pg4": "Over 70k"
 	};
-
-	if(group === "oc"){
+	if(group === "sex"){
 		result = {
 			nodes: [{"name": "Geared population"},
-					{"name": "male"},
-					{"name": "female"},
+					{"name": "Male"},
+					{"name": "Female"},
+					// {"name": "0"},
+					{"name": "0-10k"},
+					{"name": "10-30k"},
+					{"name": "30-70k"},
+					{"name": "Over 70k"},
+					{"name": "0 - -10k"},
+					{"name": "-10k - -30k"},
+					{"name": "-30k - -70k"},
+					{"name": "Over -70k"}],
+			links: []
+		};
+	}else if(group === "occupation"){
+		result = {
+			nodes: [{"name": "Geared population"},
 					{"name": "Clerical and Administrative Workers"},
 					{"name": "Community and Personal Service Workers"},
 					{"name": "Labourers"},
@@ -40,21 +57,19 @@ module.exports = function(code, group){
 					{"name": "Sales workers"},
 					{"name": "Technicians and Trades Workers"},
 					// {"name": "0"},
-					{"name": "0-1k"},
-					{"name": "1-3k"},
-					{"name": "3-7k"},
-					{"name": "Over 7k"},
-					{"name": "0 - -1k"},
-					{"name": "-1k - -3k"},
-					{"name": "-3k - -7k"},
-					{"name": "Over -7k"}],
+					{"name": "0-10k"},
+					{"name": "10-30k"},
+					{"name": "30-70k"},
+					{"name": "Over 70k"},
+					{"name": "0 - -10k"},
+					{"name": "-10k - -30k"},
+					{"name": "-30k - -70k"},
+					{"name": "Over -70k"}],
 			links: []
 		};
-	}else if(group === "age"){
+	}else{
 		result = {
 			nodes: [{"name": "Geared population"},
-					{"name": "male"},
-					{"name": "female"},
 					{"name": "15-19 years"},
 					{"name": "20-24 years"},
 					{"name": "25-29 years"},
@@ -68,53 +83,30 @@ module.exports = function(code, group){
 					{"name": "65-69 years"},
 					{"name": "70-74 years"},
 					// {"name": "0"},
-					{"name": "0-1k"},
-					{"name": "1-3k"},
-					{"name": "3-7k"},
-					{"name": "Over 7k"},
-					{"name": "0 - -1k"},
-					{"name": "-1k - -3k"},
-					{"name": "-3k - -7k"},
-					{"name": "Over -7k"}],
+					{"name": "0-10k"},
+					{"name": "10-30k"},
+					{"name": "30-70k"},
+					{"name": "Over 70k"},
+					{"name": "0 - -10k"},
+					{"name": "-10k - -30k"},
+					{"name": "-30k - -70k"},
+					{"name": "Over -70k"}],
 			links: []
 		};
 	}
 
-	result.links.push({"source": 0, "target": 1, "value": data.male.total});
-	result.links.push({"source": 0, "target": 2, "value": data.female.total});
-
-	for(var prop in data['male']){
-		// 'ages' or 'occp'
-		for(var group in data['male'][prop]){
-			// Age group or occp type
-			result.links.push({"source": 1, 
-				"target": _.findIndex(result.nodes, function(o){return o.name == group;}), 
-				"value": data['male'][prop][group].total});
-			// Gear
-			for(var gear in gearMap){
-				result.links.push({"source": _.findIndex(result.nodes, function(o){return o.name == group;}), 
-					"target": _.findIndex(result.nodes, function(o){return o.name == gearMap[gear];}), 
-					"value": data['male'][prop][group][gear]});
-			}
-		}
-	}
-
-	for(var prop in data['female']){
-		// 'ages' or 'occp'
-		for(var group in data['female'][prop]){
-			// Age group or occp type
-			result.links.push({"source": 2, 
-				"target": _.findIndex(result.nodes, function(o){return o.name == group;}), 
-				"value": data['female'][prop][group].total});
-			// Gear
-			for(var gear in gearMap){
-				result.links.push({"source": _.findIndex(result.nodes, function(o){return o.name == group;}), 
-					"target": _.findIndex(result.nodes, function(o){return o.name == gearMap[gear];}), 
-					"value": data['female'][prop][group][gear]});
-			}
+	for(var prop in workData){
+		// Age group or occp type
+		result.links.push({"source": 0, 
+			"target": _.findIndex(result.nodes, function(o){return o.name == prop;}), 
+			"value": workData[prop].total});
+		// Gear
+		for(var gear in gearMap){
+			result.links.push({"source": _.findIndex(result.nodes, function(o){return o.name == prop;}), 
+				"target": _.findIndex(result.nodes, function(o){return o.name == gearMap[gear];}), 
+				"value": workData[prop][gear]});
 		}
 	}
 
 	return result;
-
 };
