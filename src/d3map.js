@@ -101,7 +101,7 @@ var D3Map ={
         var g = svg.append("g")
             .style("stroke-width", strokeWidth)
             .style("vector-effect", "non-scaling-stroke");
-            
+
         var active = d3.select(null);
         //Load in GeoJSON data
         d3.json("data/SA4_2011_AUST.json", function(json) {

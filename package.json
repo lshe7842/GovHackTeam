@@ -4,7 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gbs": "node ad-hoc/get-by-sa.js",
+    "get": "node ad-hoc/get.js",
+    "pjs": "node ad-hoc/parse-json.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
     "express": "^4.14.0",
     "express-hbs": "^1.0.2",
     "fast-csv": "^2.1.0",
+    "jsonfile": "^2.3.1",
     "lodash": "^4.14.0",
     "method-override": "^2.3.6",
     "topojson": "^1.6.0"
