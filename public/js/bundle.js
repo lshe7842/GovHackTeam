@@ -56613,7 +56613,15 @@ var tooltip = d3.select("body")
 	.style("visibility", "hidden")
 	.text("a simple tooltip");
 
-
+var colorLookUp = { "0-10k" : "#1a75ff",
+				   "10-30k" : "#1a75ff",
+				   "30-70k" : "#1a75ff",
+				   "Over 70k" : "#1a75ff",
+				   "0 - -10k" : "#FF8C00",
+				   "-10 - -30k" : "#FF8C00",
+				   "-30 - -70k" : "#FF8C00",
+				   "Over -70k" : "#FF8C00"
+                  };
 
 var Engine = {
 	setSA4: function(newVal, refresh) {
@@ -56965,7 +56973,7 @@ var Engine = {
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		var sankey = d3.sankey()
-			    .nodeWidth(15)
+			    .nodeWidth(5)
 			    .nodePadding(10)
 			    .size([width, height]);
 
@@ -57011,7 +57019,9 @@ var Engine = {
 				    	.enter().append("path")
 				      .attr("class", "link")
 				      .attr("d", path)
+				      .style("stroke", function(d){ console.log(d.target.name); return colorLookUp[d.target.name];})
 				      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+				      .style("stroke-opacity", "0.3")
 				      .sort(function(a, b) { return b.dy - a.dy; })
 							.on("mouseover", function(d){return tooltip
 																									.style("visibility", "visible")

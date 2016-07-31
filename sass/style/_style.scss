@@ -1,3 +1,5 @@
+$breakpoints: (phone: 330px, lphone: 375px, xlphone: 450px, tablet: 768px, desktop: 1024px, large: 1240px, xlarge: 1600px);
+
 html {
 	background-image: linear-gradient(135deg, #3c3, #f9f90e);
     background-attachment: fixed;
@@ -61,6 +63,11 @@ html {
     // box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
     // opacity: 0.9;
 
+    @include media("<=xlarge") {
+    	@include flex-direction(column);
+    	@include justify-content(center);
+    }
+
     .help {
     	@include display(flex);
     	@include align-items(center);
@@ -73,13 +80,22 @@ html {
     	}
     }
 
-    .map-label {
-	    position: absolute;
-	    left: 30px;
-	    top: 200px;
-	    color: #38c;
-	    font-size: 2em;
-	    width: 100%;
+    .map-container {
+    	position: relative;
+
+    	#map {
+	    	@include media("<=xlarge") {
+	    		text-align: center;	
+	    	}
+	    }
+
+	    .map-label {
+		    position: absolute;
+		    left: 25%;
+		    top: 100px;
+		    color: #38c;
+		    font-size: 2em;
+	    }
     }
 
     .button-group {
@@ -92,6 +108,8 @@ html {
     		}
     	}
     }
+
+    
 }
 
 #chart {
