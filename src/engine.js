@@ -313,6 +313,12 @@ var Engine = {
 		this.plotSankey(pW, pH);
 	},
 	plotSankey: function(pW, pH){
+		d3.select("#chart")
+		.selectAll('svg')
+		.transition()
+		.style("opacity", 0)
+		.remove();
+
 		var margin = {top: 1, right: 1, bottom: 6, left: 1},
 		    width = pW - margin.left - margin.right,
 		    height = pH - margin.top - margin.bottom;
@@ -324,7 +330,7 @@ var Engine = {
 		var svg = d3.select("#chart").append("svg")
 		    .attr("width", width + margin.left + margin.right)
 		    .attr("height", height + margin.top + margin.bottom)
-		  .append("g")
+		  	.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		var sankey = d3.sankey()
@@ -335,13 +341,12 @@ var Engine = {
 		var energyCpy = _.cloneDeep(energy);
 		sankeyfy(energyCpy);
 
-		$('#btn-update-1').on('click', function(){
-			var energyCpy = _.cloneDeep(energy);
-		  	sankeyfy(energyCpy, true);
-		  });
+		// $('#btn-update-1').on('click', function(){
+		// 	var energyCpy = _.cloneDeep(energy);
+		//   	sankeyfy(energyCpy, true);
+		//   });
 
 		function sankeyfy(data, isUpdate){
-
 			var path = sankey.link();
 
 			  sankey
@@ -356,7 +361,7 @@ var Engine = {
 					  // var node = d3.selectAll(".node")
 					  //     .data(data.nodes);
 
-					   
+
 					d3.selectAll(".node").attr("transform", function(d) {
 					  return "translate(" + d.x + "," + d.y + ")"; });
 
@@ -372,7 +377,7 @@ var Engine = {
 			      }else{
 			      	var link = svg.append("g").selectAll(".link")
 				      .data(data.links)
-				    .enter().append("path")
+				    	.enter().append("path")
 				      .attr("class", "link")
 				      .attr("d", path)
 				      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
@@ -412,7 +417,7 @@ var Engine = {
 				      .attr("x", 6 + sankey.nodeWidth())
 				      .attr("text-anchor", "start");
 			      }
-			  
+
 			  function dragmove(d) {
 			    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
 			    sankey.relayout();
@@ -420,7 +425,7 @@ var Engine = {
 			  }
 		}
 
-		
+
 
 		  function getToLinks(d) {
 		  	var attrVal = "";
