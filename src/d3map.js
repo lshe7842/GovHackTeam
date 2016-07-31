@@ -1,4 +1,5 @@
 var d3 = require('d3');
+var Engine = require('./engine');
 
 var D3Map ={
 
@@ -14,8 +15,8 @@ var D3Map ={
             for (var i = data.length - 1; i >= 0; i--) {
                      var datum = data[i];
                      dataLookup["sa_" + datum.sa4] = datum;
-                }  
-            
+                }
+
             D3Map.dataLookUp = dataLookup;
             D3Map.zoommap();
         });
@@ -42,7 +43,7 @@ var D3Map ={
          .attr("width", 50)
          .attr("height", 10)
          .style("fill", D3Map.generateFillColour(50))
-         .style("stroke", "none"); 
+         .style("stroke", "none");
 
         y += 20;
 
@@ -53,9 +54,9 @@ var D3Map ={
              .attr("width", 50)
              .attr("height", 2)
              .style("fill", D3Map.generateFillColour(i))
-             .style("stroke", "none"); 
+             .style("stroke", "none");
 
-             y += 2; 
+             y += 2;
         }
 
         y += 15;
@@ -66,7 +67,7 @@ var D3Map ={
          .attr("width", 50)
          .attr("height", 10)
          .style("fill", D3Map.generateFillColour(-50))
-         .style("stroke", "none"); 
+         .style("stroke", "none");
 
          g.append("text")
           .attr("x", x)
@@ -79,7 +80,7 @@ var D3Map ={
 
     },
 
-    
+
     generateFillColour: function(gearing){
 
         var color = d3.scale.linear()
@@ -95,7 +96,7 @@ var D3Map ={
         var strokeWidth = "0.7px";
 
         console.log("Hi");
-        
+
         //Define map projection
         var projection = d3.geo.mercator()
             .translate([0, 0])
@@ -186,6 +187,9 @@ var D3Map ={
 
             active.style("stroke-width", "2px");
             console.log(d.properties);
+
+
+            Engine.setSA4(d.properties.SA4_CODE11, true);
         }
 
         function reset() {
@@ -206,6 +210,8 @@ var D3Map ={
                                    return D3Map.generateFillColour(data.positivelyGeared - data.negativelyGeared);
                                 })
                 .style("stroke-width", strokeWidth);
+
+            Engine.setSA4("", true);
         }
     }
 }

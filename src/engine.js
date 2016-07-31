@@ -1,10 +1,31 @@
 var _ = require('lodash'),
 	d3 = require('d3');
 
+var allByOccupation = require('../ad-hoc/sankey-all-by-occupation.json');
+var allByAge = require('../ad-hoc/sankey-all-by-age.json');
+var allBySex = require('../ad-hoc/sankey-all-by-sex.json');
+
 var energy;
+var config = {sa4: "", category: "occupation"};
+
+var tooltip = d3.select("body")
+	.append("div")
+	.style("position", "absolute")
+	.style("z-index", "10")
+	.style("visibility", "hidden")
+	.text("a simple tooltip");
+
+
 
 var Engine = {
-	config: {},
+	setSA4: function(newVal, refresh) {
+		config.sa4 = newVal;
+		if(refresh) this.sankeySA();
+	},
+	setCategory: function(newVal, refresh) {
+		config.category = newVal;
+		if(refresh) this.sankeySA();
+	},
 	desc: 'Graph engine for GovHack app.',
 	plot: function(data){
 		// Plot logic here.
@@ -304,15 +325,33 @@ var Engine = {
 		  return sankey;
 		};
 	},
-	sankeySA: function(pW, pH, code, group){
-		energy = require('./get-sankey-data-by-sa')(code, group);
-		this.plotSankey(pW, pH);
+	sankeySA: function(conf){
+		conf = config;
+		console.log('calling sankeySA with: ' + JSON.stringify(conf));
+
+		if(conf.sa4=="" || !conf.sa4) {
+			console.log('using all data');
+			if(conf.category=="occupation") energy = allByOccupation;
+			if(conf.category=="age") energy = allByAge;
+			if(conf.category=="sex") energy = allBySex;
+		} else {
+			energy = require('./get-sankey-data-by-sa')(conf.sa4, conf.category);
+		}
+
+		this.plotSankey();
 	},
-	sankeyDemo: function(pW, pH){
+	sankeyDemo: function(){
 		energy = require('../ad-hoc/sankey-all-by-occupation.json');
-		this.plotSankey(pW, pH);
+		this.plotSankey();
 	},
-	plotSankey: function(pW, pH){
+	plotSankey: function(){
+		pW = 850;
+		pH = 600;
+
+		d3.select("#chart")
+		.selectAll('svg')
+		.remove();
+
 		var margin = {top: 1, right: 1, bottom: 6, left: 1},
 		    width = pW - margin.left - margin.right,
 		    height = pH - margin.top - margin.bottom;
@@ -324,7 +363,7 @@ var Engine = {
 		var svg = d3.select("#chart").append("svg")
 		    .attr("width", width + margin.left + margin.right)
 		    .attr("height", height + margin.top + margin.bottom)
-		  .append("g")
+		  	.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		var sankey = d3.sankey()
@@ -335,13 +374,12 @@ var Engine = {
 		var energyCpy = _.cloneDeep(energy);
 		sankeyfy(energyCpy);
 
-		$('#btn-update-1').on('click', function(){
-			var energyCpy = _.cloneDeep(energy);
-		  	sankeyfy(energyCpy, true);
-		  });
+		// $('#btn-update-1').on('click', function(){
+		// 	var energyCpy = _.cloneDeep(energy);
+		//   	sankeyfy(energyCpy, true);
+		//   });
 
 		function sankeyfy(data, isUpdate){
-
 			var path = sankey.link();
 
 			  sankey
@@ -356,7 +394,7 @@ var Engine = {
 					  // var node = d3.selectAll(".node")
 					  //     .data(data.nodes);
 
-					   
+
 					d3.selectAll(".node").attr("transform", function(d) {
 					  return "translate(" + d.x + "," + d.y + ")"; });
 
@@ -372,14 +410,19 @@ var Engine = {
 			      }else{
 			      	var link = svg.append("g").selectAll(".link")
 				      .data(data.links)
-				    .enter().append("path")
+				    	.enter().append("path")
 				      .attr("class", "link")
 				      .attr("d", path)
 				      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-				      .sort(function(a, b) { return b.dy - a.dy; });
+				      .sort(function(a, b) { return b.dy - a.dy; })
+							.on("mouseover", function(d){return tooltip
+																									.style("visibility", "visible")
+																									.text(function() { console.log(d); return d.source.name + " → " + d.target.name + "\n" + format(d.value); });})
+							.on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+							.on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
-				  link.append("title")
-				      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
+				  // link.append("title")
+				  //     .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
 
 				  var node = svg.append("g").selectAll(".node")
 				      .data(data.nodes)
@@ -412,7 +455,7 @@ var Engine = {
 				      .attr("x", 6 + sankey.nodeWidth())
 				      .attr("text-anchor", "start");
 			      }
-			  
+
 			  function dragmove(d) {
 			    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
 			    sankey.relayout();
@@ -420,7 +463,7 @@ var Engine = {
 			  }
 		}
 
-		
+
 
 		  function getToLinks(d) {
 		  	var attrVal = "";
