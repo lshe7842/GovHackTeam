@@ -92,7 +92,7 @@ csv
 
 		result = _.toArray(result);
 		saSummary = _.each(result, function(row) {
-			var count = row.positivelyGeared + row.negativelyGeared + row.neutralGeared;
+			var count = row.positivelyGeared + row.negativelyGeared;
 			row.positivelyGeared = Math.round(row.positivelyGeared * 100 / count);
 			row.negativelyGeared = Math.round(row.negativelyGeared * 100 / count);
 			row.neutralGeared = Math.round(row.neutralGeared * 100 / count);
