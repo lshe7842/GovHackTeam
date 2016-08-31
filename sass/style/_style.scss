@@ -17,6 +17,14 @@ html {
 	top: 0;
     width: 100%;
 
+    &.poc {
+    	padding: 20px 0 20px 20px;
+
+    	h2 {
+    		font-size: 1.2em;
+    	}
+    }
+
 	h2 {
 	    margin: 0;
 	    font-size: 2em;

@@ -1,0 +1,60 @@
+$secondary-color: #bbdefb;
+
+html,
+body {
+	height: 100%;
+}
+
+.main-container {
+	height: 100%;
+}
+
+.property-rank-poc {
+	height: 100%;
+	min-height: 100%;
+    background-image: url('http://res.cloudinary.com/lshe7842/image/upload/e_grayscale/v1472649930/Sydney_skyline_at_dusk_-_Dec_2008_jbetwx.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+	@include display(flex);
+	@include align-items(flex-start);
+	@include justify-content(center);
+
+	.user-input-wrapper {
+		width: 40%;
+		margin-top: 200px;
+
+		.input-field {
+			width: 100%;
+
+			.prefix {
+				color: $secondary-color;
+
+				&.active {
+					color: #3c3;
+				}
+			}
+
+			input[type=text] {
+				height: 4rem;
+				font-size: 1.5rem;
+				color: #fff;
+				border-bottom: 1px solid $secondary-color;
+
+				&+label {
+					font-size: 1.2rem;
+					color: $secondary-color;
+				}
+
+				&:focus {
+					border-bottom: 1px solid #3c3;
+					box-shadow: 0 1px 0 0 #3c3;
+
+					&+label {
+						font-size: 1.1rem;
+						color: #3c3;
+					}
+				}
+			}
+		}
+	}
+}

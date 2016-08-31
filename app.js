@@ -36,6 +36,13 @@ app.get(['/', '/home'], function(req, res, next){
 	});
 });
 
+app.get('/poc', function(req, res, next){
+	res.render('property-rank-poc', {
+		title: 'Property Rating',
+		layout: 'default'
+	});
+});
+
 app.get(['/map'], function(req, res, next){
 	res.render('map', {
 		title: 'GovHack',
